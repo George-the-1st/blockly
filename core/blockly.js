@@ -202,6 +202,7 @@ Blockly.deleteBlock = function(selected) {
  */
 Blockly.copy = function(toCopy) {
   var data = toCopy.toCopyData();
+  
   if (data) {
     Blockly.clipboardXml_ = data.xml;
     Blockly.clipboardSource_ = data.source;
@@ -242,8 +243,23 @@ Blockly.paste = function() {
  */
 Blockly.duplicate = function(toDuplicate) {
   // Save the clipboard.
-  var clipboardXml = Blockly.clipboardXml_;
-  var clipboardSource = Blockly.clipboardSource_;
+  var clipboardXml = {
+	  
+	  defClipboardXml: Blockly.clipboardXml_
+  
+  getClipboardXml: function(){
+	  return this.defClipboardXml;
+  }
+  };
+  
+  var clipboardSource = {
+	  
+	  defClipboardSource: Blockly.clipboardSource_
+	  
+	getClipboardSource: function{
+		return this.defClipboardSource;
+	}  
+  };
 
   // Create a duplicate via a copy/paste operation.
   Blockly.copy(toDuplicate);
